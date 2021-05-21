@@ -33,3 +33,4 @@ cloud-init
 cloud-utils-growpart
 %end
 
+services --enabled=sshd,cloud-init

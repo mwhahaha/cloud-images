@@ -21,5 +21,5 @@ virt-install \
     --serial=pty \
     --nographics
 
-#qemu-img convert -O qcow2 "${WORK_DIR}/centos-9-stream.img" "${WORK_DIR}/centos-9-stream.qcow2"
-#rm -rf ${WORK_DIR}/centos-9-stream.img"
+qemu-img convert -O qcow2 "${WORK_DIR}/centos-9-stream.img" "${WORK_DIR}/centos-9-stream.qcow2"
+rm -rf "${WORK_DIR}/centos-9-stream.img"
