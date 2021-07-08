@@ -1,0 +1,25 @@
+#!/bin/bash
+set -ex
+#   --location="http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os"
+WORK_DIR=$(pwd)
+KS_FILE=centos-7.ks
+MIRROR="http://mirror.centos.org/centos/7"
+DISK_SIZE=10
+
+virt-install \
+    --transient \
+    --name=centos-7 \
+    --ram=4096 \
+    --arch=x86_64 \
+    --cpu=host \
+    --vcpus=4 \
+    --os-variant=rhel7.8 \
+    --initrd-inject="${KS_FILE}" \
+    --extra-args="inst.ks=file:/${KS_FILE} console=tty0 console=ttyS0,115200 rd_NO_PLYMOUTH" \
+    --disk="${WORK_DIR}/centos-7.img,size=${DISK_SIZE},sparse=true,format=qcow2" \
+    --location="${MIRROR}/os/x86_64/" \
+    --serial=pty \
+    --nographics
+
+qemu-img convert -O qcow2 "${WORK_DIR}/centos-7.img" "${WORK_DIR}/centos-7.qcow2"
+rm -rf "${WORK_DIR}/centos-7.img"

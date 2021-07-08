@@ -22,4 +22,4 @@ virt-install \
     --nographics
 
 qemu-img convert -O qcow2 "${WORK_DIR}/centos-8-stream.img" "${WORK_DIR}/centos-8-stream.qcow2"
-rm -rf ${WORK_DIR}/centos-8-stream.img"
+rm -rf "${WORK_DIR}/centos-8-stream.img"
