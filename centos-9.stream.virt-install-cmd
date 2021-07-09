@@ -3,7 +3,8 @@ set -ex
 #   --location="http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os"
 WORK_DIR=$(pwd)
 KS_FILE=centos-9.stream.ks
-MIRROR="https://composes.stream.centos.org/test/latest-CentOS-Stream/compose/"
+# inst.noverifyssl needs to be enabled if using an https mirror
+MIRROR="https://odcs.stream.centos.org/test/latest-CentOS-Stream/compose"
 DISK_SIZE=10
 
 virt-install \
@@ -15,11 +16,12 @@ virt-install \
     --vcpus=4 \
     --os-variant=rhel8.0 \
     --initrd-inject="${KS_FILE}" \
-    --extra-args="inst.ks=file:/${KS_FILE} console=tty0 console=ttyS0,115200 rd_NO_PLYMOUTH" \
+    --extra-args="inst.ks=file:/${KS_FILE} console=tty0 console=ttyS0,115200 rd_NO_PLYMOUTH inst.noverifyssl" \
     --disk="${WORK_DIR}/centos-9-stream.img,size=${DISK_SIZE},sparse=true,format=qcow2" \
     --location="${MIRROR}/BaseOS/x86_64/os" \
     --serial=pty \
     --nographics
 
+virt-sysprep -a "${WORK_DIR}/centos-9-stream.img"
 qemu-img convert -O qcow2 "${WORK_DIR}/centos-9-stream.img" "${WORK_DIR}/centos-9-stream.qcow2"
 rm -rf "${WORK_DIR}/centos-9-stream.img"

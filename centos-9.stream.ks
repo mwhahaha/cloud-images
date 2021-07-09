@@ -8,16 +8,16 @@ lang en_US.UTF-8
 keyboard us
 network --bootproto dhcp
 rootpw builder
+sshpw --username root --plaintext builder
 firewall --enabled --ssh
 timezone --utc America/New_York
 selinux --enforcing
 
 bootloader --location=mbr --append="console=tty0 console=ttyS0,115200 rd_NO_PLYMOUTH"
 
-#url --url="http://mirror.centos.org/centos/8-stream/BaseOS/x86_64/os"
-url --url="https://composes.stream.centos.org/test/latest-CentOS-Stream/compose/BaseOS/x86_64/os"
+url --url="https://odcs.stream.centos.org/test/latest-CentOS-Stream/compose/BaseOS/x86_64/os"
 
-repo --name="AppStream" --baseurl="https://composes.stream.centos.org/test/latest-CentOS-Stream/compose/AppStream/x86_64/os"
+repo --name="AppStream" --baseurl="https://odcs.stream.centos.org/test/latest-CentOS-Stream/compose/AppStream/x86_64/os"
 
 zerombr
 clearpart --all --initlabel --disklabel=gpt
