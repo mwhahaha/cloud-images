@@ -4,7 +4,7 @@ set -ex
 WORK_DIR=$(pwd)
 KS_FILE=centos-9.stream.ks
 # inst.noverifyssl needs to be enabled if using an https mirror
-MIRROR="https://odcs.stream.centos.org/test/latest-CentOS-Stream/compose"
+MIRROR="https://odcs.stream.centos.org/production/latest-CentOS-Stream/compose"
 DISK_SIZE=10
 
 virt-install \
